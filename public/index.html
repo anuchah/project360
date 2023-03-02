@@ -1,12 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- for optimal display on high DPI devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin/index.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer/dist/photo-sphere-viewer.min.css" />
+
+
 </head>
+
 <body>
-    
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin/index.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <!-- the viewer container must have a defined size -->
+
+    <div id="viewer" style="width: 100vw; height: 100vh;"></div>
+
+    <script>
+        const PSV = new PhotoSphereViewer.Viewer({
+            container: document.querySelector('#viewer'),
+            touchmoveTwoFingers: true,
+            mousewheelCtrlKey: true,
+            plugins: [
+                [PhotoSphereViewer.VirtualTourPlugin, {
+                    positionMode: 'gps',
+                    renderMode: '3d',  
+                }]
+            ]
+        });
+        const virtualTour = PSV.getPlugin(PhotoSphereViewer.VirtualTourPlugin);
+
+        if (virtualTour) {
+            virtualTour.setNodes([
+                {
+                    id: '1',
+                    panorama: 'img/imgSwamp.jpg',
+                    name: 'บึงสีฐาน',
+                    links: [{ nodeId: '2' },{ nodeId: '3' },{ nodeId: '4' },{ nodeId: '5' }],
+                    gps: [6, 3, 3],
+                    
+                },{
+                    id: '2',
+                    panorama: 'img/imgCS.jpg',
+                    name: 'CS',
+                    links: [{ nodeId: '1' },{ nodeId: '3' },{ nodeId: '4' },{ nodeId: '5' }],
+                    gps: [2, 2,3],
+                    
+                },{
+                    id: '3',
+                    panorama: 'img/imgCircle.jpg',
+                    name: 'วงเวียน',
+                    links: [{ nodeId: '1' },{ nodeId: '2' },{ nodeId: '4' },{ nodeId: '5' }],
+                    gps: [3, 2.5 , 3],
+                   
+                },{
+                    id: '4',
+                    panorama: 'img/imgCom.jpg',
+                    name: 'Compag',
+                    links: [{ nodeId: '1' },{ nodeId: '2' },{ nodeId: '3' },{ nodeId: '5' }],
+                    gps: [3, 2,3],
+                    
+                },{
+                    id: '5',
+                    panorama: 'img/img4way.jpg',
+                    name: '4way',
+                    links: [{ nodeId: '1' },{ nodeId: '2' },{ nodeId: '3' },{ nodeId: '4' }],
+                    gps: [4, 1.2,3],
+                    
+                }],'3'
+            );
+        } else {
+            console.log('virtualTour is undefined');
+        }
+
+    </script>
+
 </body>
+
 </html>
