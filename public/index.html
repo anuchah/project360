@@ -15,13 +15,9 @@
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
-
-
     <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin/index.min.js"></script>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
@@ -35,56 +31,280 @@
             touchmoveTwoFingers: true,
             mousewheelCtrlKey: true,
             plugins: [
-                [PhotoSphereViewer.VirtualTourPlugin, {
+                PhotoSphereViewer.MarkersPlugin, [PhotoSphereViewer.VirtualTourPlugin, {
                     positionMode: 'gps',
-                    renderMode: '3d',  
+                    renderMode: '3d',
                 }]
             ]
         });
         const virtualTour = PSV.getPlugin(PhotoSphereViewer.VirtualTourPlugin);
 
-        if (virtualTour) {
-            virtualTour.setNodes([
-                {
-                    id: '1',
-                    panorama: 'img/imgSwamp.jpg',
-                    name: 'บึงสีฐาน',
-                    links: [{ nodeId: '2' },{ nodeId: '3' },{ nodeId: '4' },{ nodeId: '5' }],
-                    gps: [6, 3, 3],
-                    
+
+        virtualTour.setNodes([
+            {
+                id: '1',
+                panorama: 'img/imgSwamp.jpg',
+                name: 'บึงสีฐาน',
+                links: [{ nodeId: '2' }, { nodeId: '3' }, { nodeId: '4' }, { nodeId: '5' }],
+                gps: [4, 5,10],
+                panoData: { poseHeading: 170 },
+                markers: [{
+                    id: 'm1',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '100deg', pitch: '15deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>หอศิลป์</div>",
+                    content : markerContent('img/art.png','Art and Culture University Museum','หอศิลปวัฒนธรรม มหาวิทยาลัยขอนแก่น (อังกฤษ: Art Centre Khon Kaen University; เดิม: Art & Culture University Museum) หรือเป็นที่รู้จักกันในชื่อ หอศิลป์ มข. เป็นอาคารจัดแสดงนิทรรศการทางศิลปะร่วมสมัย ศิลปะอีสาน และพิพิธภัณฑ์การศึกษาเกี่ยวกับภาคอีสาน ภายใต้การดำเนินการของศูนย์ศิลปวัฒนธรรม มหาวิทยาลัยขอนแก่น เป็นหอศิลป์ประจำมหาวิทยาลัยขอนแก่น ตั้งอยู่บริเวณริมบึงสีฐานฝั่งตะวันตก ถนนศรีฐาน ตำบลศิลา อำเภอเมืองขอนแก่น จังหวัดขอนแก่น เป็นหอศิลป์แห่งแรกและหอศิลป์ที่ใหญ่ที่สุดในจังหวัดขอนแก่น')
+
                 },{
-                    id: '2',
-                    panorama: 'img/imgCS.jpg',
-                    name: 'CS',
-                    links: [{ nodeId: '1' },{ nodeId: '3' },{ nodeId: '4' },{ nodeId: '5' }],
-                    gps: [2, 2,3],
-                    
+                    id: 'm2',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '250deg', pitch: '15deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>ศูนย์ประชุมอเนกประสงค์กาญจนาภิเษก</div>",
+                    content : markerContent('img/หอกาญ.jpg','ศูนย์ประชุมอเนกประสงค์กาญจนาภิเษก (อังกฤษ: Golden Jubilee Convention Hall)','ศูนย์ประชุมอเนกประสงค์กาญจนาภิเษก จัดสร้างขึ้นโดยมหาวิทยาลัยขอนแก่น ในโอกาสที่พระบาทสมเด็จพระปรมินทรมหาภูมิพลอดุลยเดชทรงครองสิริราชสมบัติครบ 50 ปี โดยพระบาทสมเด็จพระเจ้าอยู่หัวเสด็จพระราชดำเนินไปทรงวางศิลาฤกษ์ เมื่อวันพฤหัสบดีที่ 15 ธันวาคม 2537 เพื่อเป็นศูนย์ประชุมระดับชาติแห่งใหม่ ลักษณะของตัวอารเป็นอาคารโอ่อ่าด้วยสถาปัตยกรรมทรงกูบเกวียนอีสาน ประยุกต์จากเอกลักษณ์ของรูปทรงแต่ดั้งเดิมอย่างงดงาม ตั้งตระหง่านอยู่ท่ามกลางธรรมชาติริมบึงสีฐานและป่าพยอม ที่ได้รับการปรับแต่งให้มีภูมิทัศน์งดงามโดดเด่นเป็นสง่า ขณะเดียวกันก็เป็นทำเลที่สะดวกพร้อมสรรพ ริมถนนมะลิวัลย์ ทางเข้ามหาวิทยาลัยขอนแก่น ใกล้ใจกลางเมืองขอนแก่นเพียง 1.5 กิโลเมตร และจากสนามบินจังหวัดขอนแก่นเพียง 4 กิโลเมตร รายล้อมด้วยสถานที่สำคัญต่างๆตลอดจนโรงแรมทันสมัยและห้างสรรพสินค้ามากมาย สามารถรองรับการจัดงานประชุมได้ถึง 8,000 ที่นั่ง พร้อมอัฒจันทร์ในบริเวณชั้นลอยอีก 1,000 ที่นั่ง พื้นที่ 3,000 ตารางเมตร ยังปรับเปลี่ยนเป็นลานกว้าง สำหรับการจัดแสดงคอนเสิร์ตที่จุคนได้กว่า 10,000 คน พร้อมสรรพทั้งระบบแสง สี เสียงและโสตทัศนูปกรณ์ทันสมัยสำหรับงานระดับชาติ ระบบทำความเย็นและระบบไฟสำรอง พร้อมระบบรักษาความปลอดภัยที่ทันสมัย ลานจอดรถกว้างขวาง จุได้กว่า 3,000 คัน และรถโดยสารกว่า 50 คัน และในทุกๆปียังใช้เป็นสถานที่จัดงานพีธีพระราชทานปริญญาบัตรของมหาวิทยาลัยขอนแก่นอีกด้วย')
+
                 },{
-                    id: '3',
-                    panorama: 'img/imgCircle.jpg',
-                    name: 'วงเวียน',
-                    links: [{ nodeId: '1' },{ nodeId: '2' },{ nodeId: '4' },{ nodeId: '5' }],
-                    gps: [3, 2.5 , 3],
-                   
+                    id: 'm3',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '280deg', pitch: '9deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>ตลาดเปิดท้ายหอกาญ</div>",
+                    content : markerContent('img/เปิดท้าย.jpeg','ตลาดเปิดท้ายหอกาญ','ตลาดเปิดท้ายศูนย์กาญ แหล่งรวมสินค้าแฟชั่น สินค้ามือสอง อาหารอร่อยในจังหวัดขอนแก่น')
+
                 },{
-                    id: '4',
-                    panorama: 'img/imgCom.jpg',
-                    name: 'Compag',
-                    links: [{ nodeId: '1' },{ nodeId: '2' },{ nodeId: '3' },{ nodeId: '5' }],
-                    gps: [3, 2,3],
-                    
+                    id: 'm4',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '320deg', pitch: '5deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>บึงสีฐาน</div>",
+                    content : markerContent('img/บึง.jpg','บึงสีฐาน','เป็นบึงน้ำจืดขนาดเล็ก ที่มีความยาวรอบบึงประมาณ 3 กิโลเมตร เป็นบึงที่อยู่ภายในมหาวิทยาลัยขอนแก่น ฝั่งประตูสีฐานติดกับถนนมะลิวัลย์  และอยู่ติดกับศูนย์ประชุมเอนกประสงค์กาญจนาภิเษก มหาวิทยาลัยขอนแก่นในทุกวันช่วงเย็น 17.00 น. เป็นต้นไป จะเห็นภาพ นักศึกษา, บุคลากรมหาวิทยาลัยขอนแก่นรวมถึงประชาชนในจังหวัดขอนแก่น มักจะเลือกสถานที่บึงศรีฐานเป็นที่ออกกำลังกายไม่ว่าจะเดินเพื่อสุขภาพ, วิ่ง, ปั่นจักรยาน และบางคนก็พาเพื่อน พาครอบครัวมานั่งกินลมชมวิวที่นี่  โดยบึงสีฐานก็แบ่งจุดทำกิจกรรมไว้ได้อย่างชัดเจน อย่างใครชอบวิ่ง , อยากเดินเพื่อสุขภาพหรือ อยากปั่นจักรยานก็ทำกิจกรรมรอบบึงได้โดยแบ่งช่องจราจรอย่างชัดเจน เลนวิ่ง ,เลนเดินเลนปั่นจักรยาน')
+
                 },{
-                    id: '5',
-                    panorama: 'img/img4way.jpg',
-                    name: '4way',
-                    links: [{ nodeId: '1' },{ nodeId: '2' },{ nodeId: '3' },{ nodeId: '4' }],
-                    gps: [4, 1.2,3],
-                    
-                }],'3'
-            );
-        } else {
-            console.log('virtualTour is undefined');
-        }
+                    id: 'm5',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '35deg', pitch: '6deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>ประตูทางเข้ามหาวิทยาลัยขอนแก่นฝั่งศรีฐาน</div>",
+                    content : markerContent('img/ประตู.jpg','ประตูทางเข้ามหาวิทยาลัยขอนแก่นฝั่งศรีฐาน','ประตูมหาวิทยาลัยขอนแก่น(ด้านประตูสีฐาน) สร้างเมื่อ ปี พ.ศ.2510 กรอบสีทอง')
+
+                }]
+
+            }, {
+                id: '2',
+                panorama: 'img/imgCS.jpg',
+                name: 'CS',
+                links: [{ nodeId: '1' }, { nodeId: '3' }, { nodeId: '4' }, { nodeId: '5' }],
+                gps: [-2, -1,10],
+                markers: [{
+                    id: 'm6',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '130deg', pitch: '15deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>อาคารวิทยวิภาส</div>",
+                    content : markerContent('img/sc09.jpg','อาคารวิทยวิภาส','อาคารวิทยวิภาส เป็นอาคารคอนกรีตเสริมเหล็ก สูง 5 ชั้น พื้นที่ใช้สอย24563 ตารางเมตร สร้างขึ้นเพื่อทดแทนอาคารSC02 ที่มี มีสภาพทรุดโทรม จึงได้รับการจัดสรรงบประมาณก่อสร้างในปีงบประมาณพ.ศ. 2559 เป็นจำนวน 495,661,000 บาท อาคารออกแบบจากแนวคิด “สภาพแวดล้อมที่เอื้ออำนวยต่อการเรียนรู้” มีการนำองค์ความรู้ทางด้านวิทยาศาสตร์และเทคโนโลยีมาใช้ในการออกแบบ เพื่อให้สามารถนำเอาพลังงานธรรมชาติมาใช้ในอาคารได้อย่างมีประสิทธิภาพ เพื่อใช้ในการเรียนการสอนของคณะวิทยาศาสตร์ การวิจัยและการเรียนการสอนของสาขาวิชาฟิสิกส์ สาขาวัสดุศาสตร์และนาโนเทคโนโลยี และสาขาวิชาวิทยาการคอมพิวเตอร์ สำหรับ“อาคารวิทยวิภาส” ได้รับพระมหากรุณาธิคุณจากสมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯสยามบรมราชกุมารี เสด็จพระราชดำเนินมาทรงวางศิลาฤกษ์ ในวันที่ 14 ธันวาคม พุทธศักราช 2558 และได้รับพระราชทานชื่ออาคารจากใต้ฝ่าละอองพระบาทที่มีความหมายว่า “อาคารที่เป็นแหล่งความรุ่งเรืองของความรู้” ทั้งพระราชทานพระราชานุญาตให้เชิญอักษรพระนามาภิไธย “ส.ธ.” ประดับเหนือชื่ออาคาร เมื่อวันที่ 15 พฤศจิกายน 2561')
+
+                },{
+                    id: 'm7',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '250deg', pitch: '1deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>โรงอาหารคณะมนุษย์ศาสตร์</div>",
+                    content : markerContent('img/โรงอาหารคณะมนุษย์.jpg','โรงอาหารคณะมนุษย์ศาสตร์',' โรงอาหารคณะมนุษย์ศาสตร์ เป็นโรงอาหารที่สาอาดและอร่อย')
+
+                },,{
+                    id: 'm9',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '330deg', pitch: '20deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>อาคารรัตนพิทยา HS 01</div>",
+                    content : markerContent('img/อพินยา.png','อาคารรัตนพิทยา HS 01','อาคารรัตนพิทยา HS 01 เป็นอาคารสูง 9 ชั้นของคณะมนุษย์ศาสตร์')
+
+                },{
+                    id: 'm10',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '35deg', pitch: '4deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>ป้าย College of Computing</div>",
+                    content : markerContent('img/ป้ายCS.jpg','ป้าย College of Computing','ป้ายทางเข้า อาคารวิทยวิภาส')
+
+                }]
+
+            }, {
+                id: '3',
+                panorama: 'img/imgCircle.jpg',
+                name: 'วงเวียน',
+                links: [{ nodeId: '1' }, { nodeId: '2' }, { nodeId: '4' }, { nodeId: '5' }],
+                gps: [0, 0,10],
+                markers: [{
+                    id: 'm11',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '90deg', pitch: '10deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>สะพานขาว</div>",
+                    content : markerContent('img/สะพานขาว.png','สะพานขาว','สะพานขาว ตั้งอยู่ใจกลางพื้นที่ของมหาวิทยาลัยแห่งหนึ่ง ในเขตภาคอีสาน โดยรอบเป็นป่าทั้งหมด ช่วงหน้าหนาวอากาศจะเย็นมากเพราะมีต้นไม้เยอะมาก แต่ก่อนพื้นที่ของมหาวิทยาลัยนี้ เป็นที่อยู่ของพวกคอมมิวนิสต์ ซึ่งมีการรบกันระหว่างคอมมิวนิสต์กับตำรวจทหาร ทำให้คอมมิวนิสต์ตายเป็นจำนวนมาก ศพไม่มีที่เผาจึงทำการฝัง จากนั้นมีการก่อตั้งมหาลัยเกิดขึ้น มีการสร้างถนนตัดผ่านช่วงหลุมฝังศพของคอมมิวนิสต์ มีอุบัติเหตุเกิดขึ้นหลายครั้ง และมีคนตายเป็นจำนวนมาก')
+
+                },{
+                    id: 'm21',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '235deg', pitch: '30deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>พระบรมราชานุสาวรีย์ พระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว รัชกาลที่ ๔</div>",
+                    content : markerContent('img/รูปปั้นร.4.jpg','พระบรมราชานุสาวรีย์ พระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว รัชกาลที่ ๔','พระบรมราชานุสาวรีย์พระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว รัชกาลที่4 บริเวณวงเวียนคณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น ประวัติความเป็นมา(อ้างอิง:หอจดหมายเหตุ มหาวิทยาลัยขอนแก่น)นับตั้งแต่ปีพุทธศักราช2525 เป็นต้นมา ในวันที่18 สิงหาคมของทุกปี คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น ได้จัดทำพิธีรำลึกถึงพระมหากรุณาธิคุณของพระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว(รัชกาลที่4) ผู้ทรงพระราชสามัญว่าเป็นพระบิดาแห่งวิทยาศาสตร์ไทยซึ่งเป็นที่ยอมรับกันว่า พระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว ได้ทรงศึกษาวิชาวิทยา-ศาสตร์ โดยเฉพาะอย่างยิ่งดาราศาสตร์ทรงมีความเชี่ยวชาญทางด้านดาราศาสตร์เทียบเท่ากับนักดาราศาสตร์สากล พระองค์ทรงวางรากฐานที่จะนำวิทยาการใหม่ของตะวันตก ตลอดจนความรู้ทางวิทยาศาสตร์แผนใหม่ และเทคโนโลยีเข้ามาใช้ในการบริหารประเทศอย่างระมัดระวังและดัดแปลงให้เหมาะสมกับสิ่งแวดล้อมและสถานการณ์ของประเทศ สิ่งใดแปลกใหม่ แม้ไม่ทรงได้เคยรู้มาก่อน ก็ทรงตั้งพระทัยติดตามศึกษาหาความรู้ด้วยน้ำพระทัยของนักวิทยาศาสตร์เมื่อนักวิทยาศาสตร์ไทยได้มีการประชุมกัน เพื่อพิจารณาหาวันวิทยาศาสตร์แห่งชาติได้ตกลงมีมติเลือกวันที่พระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว ทรงคำนวณคาดหมายไว้ว่าจะเกิดสุริยุปราคาที่ ตำบลหว้ากอ จังหวัดประจวบคีรีขันธ์ ในวันที่ 18 สิงหาคม พ.ศ. 2411 เป็นวันวิทยาศาสตร์แห่งชาติ และเสนอขอความเห็นชอบจากรัฐบาลสมัยพลเอกเปรม ติณสูลานนท์ เป็นนายกรัฐมนตรี คณะรัฐมนตรีมีมติเมื่อวันที่ 14 เมษายน อนุมัติให้วันที่ 18 สิงหาคม เป็นวันวิทยาศาสตร์แห่งชาติ โดยเริ่มตั้งแต่ปี พ.ศ. 2525 เป็นต้นไป และได้ประกาศยกย่องว่าพระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว ทรงเป็น พระบิดาแห่งวิทยาศาสตร์ไทย นับว่าเหมาะสมด้วยประการทั้งปวง')
+
+                },{
+                    id: 'm31',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '250deg', pitch: '40deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>SC06</div>",
+                    content : markerContent('img/ตึกSC06.jpg','SC06','SC06 หรืออีกชื่อคือ ตึกหลอด เป็นที่อยู่ของสำนักคณบดี ภาควิชาคอมพิวเตอร์ ภาคสถิติ')
+
+                },{
+                    id: 'm41',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '330deg', pitch: '9deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>อาคาร 50 ปี วิศวะรวมใจ</div>",
+                    content : markerContent('img/ตึก50ปีวิศวะมข.jpg','อาคาร 50 ปี วิศวะรวมใจ','อาคาร 50 ปี วิศวะรวมใจ เดิมชื่อ “อาคารเรียนรวม 50 ปี คณะวิศวกรรมศาสตร์” สร้างเพื่อเป็นอนุสรณ์ในโอกาสครบรอบ 50 ปี ของการสถาปนาคณะฯ ตัวอาคารเป็นโครงสร้างคอนกรีตเสริมเหล็กสูง 4 ชั้นพร้อมชั้นใต้ดิน 1 ชั้น มีพื้นที่ใช้สอยภายในอาคารรวมทั้งสิ้น ประมาณ 14,700 ตารางเมตร ใช้รองรับภารกิจของคณะฯ ในด้านต่าง ๆ ประกอบด้วยห้องบรรยาย ห้องจัดประชุม, ห้องสมุด, ศูนย์สื่อและสารสนเทศ, หอเกียรติยศ ส่วนจัดแสดงผลงานวิชาการและวิจัย เป็นนวัตกรรมต้นแบบแห่งอนาคตสะท้อนเทคโนโลยีผสมผสานกับการให้ความส าคัญกับสภาพแวดล้อม ประหยัดพลังงานและรักษาสิ่งแวดล้อม ใช้เป็นต้นแบบส าหรับการเรียนการสอนในงานวิศวกรรมสาขาต่าง ๆ รวมถึงเป็นจุดหมายตา (LANDMARK) ที่โดดเด่น')
+
+                },{
+                    id: 'm15',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '160deg', pitch: '18deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>ตึกคณะเทคโนโลยี</div>",
+                    content : markerContent('img/เทคโน.png','ตึกคณะเทคโนโลยี','ตึกเรียนของคณะเทคโนโลยี')
+
+                }]
+
+            }, {
+                id: '4',
+                panorama: 'img/imgCom.jpg',
+                name: 'Complex',
+                links: [{ nodeId: '1' }, { nodeId: '2' }, { nodeId: '3' }, { nodeId: '5' }],
+                gps: [0, -3,10],
+                markers: [{
+                    id: 'm21',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '160deg', pitch: '18deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>Complex</div>",
+                    content : markerContent('img/คอมเพล็กซ์.jpg','Complex','ภายในมหาวิทยาลัยขอนแก่น เมื่อนึกถึงศูนย์อาหารแหล่งใหญ่ที่สุดที่ตั้งอยู่ภายในมหาวิทยาลัย คงจะเป็นศูนย์อาหารไหนไปไม่ได้ นั่นคือศูนย์อาหารและบริการ 1 หรือคนในจะเรียกว่า คอมเพล็กซ์ เพราะเหตุใด จึงเรียกแบบนั้น ก็เพราะว่า นอกจากร้านอาหารหลายร้านที่ตั้งเรียงรายอยู่ภายในนี้แล้ว ก็ยังมีร้านขายขนม , เครื่องดื่ม ไปจนถึงร้านค้าจำหน่ายเสื้อผ้า , สินค้าจำเป็น ไปจนถึงร้านตัดผม,ร้านหนังสือ , ธนาคาร เรียกได้ว่า เข้ามาที่ศูนย์อาหารและบริการ 1  มหาวิทยาลัยขอนแก่น ที่นี่ที่เดียว ซื้อของได้ครบทุกอย่าง สะดวกสบาย กันเลยทีเดียว')
+
+                },{
+                    id: 'm22',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '230deg', pitch: '15deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>BaNANA </div>",
+                    content : markerContent('img/Banana.png','BaNANA ','BaNANA B Campus สาขา ม.ขอนแก่น')
+
+                },{
+                    id: 'm23',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '-30deg', pitch: '20deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>สำนักหอสมุดเป็น</div>",
+                    content : markerContent('img/library.png','สำนักหอสมุดเป็น','สำนักหอสมุดเป็น “ศูนย์กลางของการเรียนรู้สำหรับทุกคน” (Learning center for all) เพื่อสนับสนุนวิสัยทัศน์ของมหาวิทยาลัยขอนแก่นในการเป็นมหาวิทยาลัยวิจัยและพัฒนาชั้นนำระดับโลก (A world-leading research and development university)')
+
+                },{
+                    id: 'm24',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '-2deg', pitch: '5deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>U store</div>",
+                    content : markerContent('img/Ustorekku.jpg','U store','U store ร้านจำหน่าย อุปกรณ์ IT สำหรับนักศึกษา')
+                },{
+                    id: 'm25',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '75deg', pitch: '3deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>คณะเกษตรศาสตร์</div>",
+                    content : markerContent('img/เกษตร.png','คณะเกษตรศาสตร์','คณะเกษตรศาสตร์มหาวิยาลัยขอนแก่น')
+
+                }]
+
+            }, {
+                id: '5',
+                panorama: 'img/สนาม.jpg',
+                name: 'สนาม',
+                links: [{ nodeId: '1' }, { nodeId: '2' }, { nodeId: '3' }, { nodeId: '4' }],
+                gps: [-1, -1,10],
+                panoData: { poseHeading: 45 },
+                markers: [{
+                    id: 'm31',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '200deg', pitch: '11deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>ตลาดข้างตึก SC08</div>",
+                    content : markerContent('img/sc09.jpg','ตลาดข้างตึก SC08','ตลาดข้างตึก SC08 เป็นตลาดขนาดเล็ก')
+
+                },{
+                    id: 'm32',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '35deg', pitch: '25deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>SC06</div>",
+                    content : markerContent('img/ตึกSC06.jpg','SC06','SC06 หรืออีกชื่อคือ ตึกหลอด เป็นที่อยู่ของสำนักคณบดี ภาควิชาคอมพิวเตอร์ ภาคสถิติ')
+                },{
+                    id: 'm33',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '80deg', pitch: '15deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>สถาบันวิจัยและพัฒนา</div>",
+                    content : markerContent('img/วิจัย.png','สถาบันวิจัยและพัฒนา','  ')
+
+                },{
+                    id: 'm34',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '150deg', pitch: '12deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>SC01</div>",
+                    content : markerContent('img/ตึกSC01','SC01','อาคารเรียน SC01 หรือ ตึกกลม มีอยู่ทั้งหมด 3 ห้อง เป็นห้องเล็คเชอร์ ลักษณะเป็นพื้นลาดเอียงลงไปด้านหน้าชั้น')
+
+                },{
+                    id: 'm35',
+                    image: 'img/marker.png',
+                    size: { width: 666, height: 375 },
+                    position: { yaw: '185deg', pitch: '30deg' },
+                    size: { width: 50, height: 50 },
+                    tooltip:"<div class='alert alert-primary'>SC08</div>",
+                    content : markerContent('img/SC08.jpg','SC08','SC08 อาคารเรียนและภาคปฎิบัติการ ตั้งอยู่ใน ภาควิชาวิทยาศาสตร์สิ่งแวดล้อม')
+
+                }]
+
+            }], '2'
+        );
+
+        function markerContent(image,name,description) {
+            return [`<div class='alert alert-primary'>${name}</div>`, `<img src='${image}' width='100%'>`, `<p>    ${description}</p>`];
+            
+          }
+
 
     </script>
 
